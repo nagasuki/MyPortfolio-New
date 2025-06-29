@@ -1,22 +1,68 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    background: #181818 !important;
+}
+
+.sidebar {
+    min-height: 100vh;
+    border-right: 1px solid #222a;
+    background: #222;
+    width: 220px;
+}
+
+    .sidebar .nav-link {
+        color: #aaa !important;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            color: #00ffd5 !important;
+            background: none;
+        }
+
+.nav-link.pointer-nav {
+    position: relative;
+    color: #00ffd5 !important;
+    font-weight: bold;
+}
+
+    .nav-link.pointer-nav::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        background: #00ffd5;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #00ffd5a0;
+    }
+
+.logo span:first-child {
+    font-size: 3rem;
+    color: #00ffd5;
+    font-weight: bold;
+}
+
+.logo span.fw-bold {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.logo span.text-secondary {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 100vw;
+        min-height: unset;
+        flex-direction: row !important;
+    }
+
+        .sidebar .logo, .sidebar ul {
+            display: none;
+        }
 }

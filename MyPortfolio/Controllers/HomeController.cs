@@ -18,7 +18,17 @@ namespace MyPortfolio.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ResumeAndCV()
+        {
+            return View();
+        }
+
+        public IActionResult Portfolio()
+        {
+            return View();
+        }
+
+        public IActionResult Contract()
         {
             return View();
         }

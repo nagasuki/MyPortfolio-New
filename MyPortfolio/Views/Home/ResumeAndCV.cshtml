@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "ResumeAndCV";
+}
+<h1>ResumeAndCV</h1>
+
+<section id="resume" class="vh-100 d-flex align-items-center justify-content-center" data-aos="fade-left">
+    <!-- กำหนดขนาดแผ่น PDF ให้อยู่กลาง Responsive -->
+    <div class="container my-4 d-flex justify-content-center">
+        <div id="pdf-viewer" style="box-shadow:0 4px 32px #0002;border-radius:16px;background:#fff;overflow:auto;width:600px;max-width:100%;">
+            <canvas id="pdf-canvas" style="width:100%;height:auto;display:block;border-radius:16px;"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- PDF.js -->
+<script src="~/pdfjs/build/pdf.mjs" type="module"></script>
+<script type="module">
+    var url = '@Url.Content("~/files/pdf/Resume_Tiyanon.pdf")';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '@Url.Content("~/pdfjs/build/pdf.worker.mjs")';
+
+    var pdfDoc = null,
+        pageNum = 1,
+        canvas = document.getElementById('pdf-canvas'),
+        ctx = canvas.getContext('2d');
+
+    pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        pdfDoc.getPage(pageNum).then(function (page) {
+            var viewport = page.getViewport({ scale: 1.5 });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            page.render({ canvasContext: ctx, viewport: viewport });
+        });
+    });
+</script>

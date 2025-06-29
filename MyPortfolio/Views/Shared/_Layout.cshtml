@@ -7,43 +7,63 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyPortfolio.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init();</script>
 </head>
 <body>
-    <header>
-        <aside>
-            <nav class="navbar navbar-light bg-dark sidebar-nav d-flex flex-column align-items-start py-4" style="height: 100vh;">
-                <a class="navbar-brand mb-4 mx-3 text-white" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span>Nail</span><br />
-                    <span style="nail-header">Game Developer</span>
-                </a>
-                <ul class="navbar-nav flex-column w-100">
-                    <li class="nav-item w-100">
-                        <a class="nav-link text-white px-4" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link text-white px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Resume / CV</a>
-                    </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link text-white px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Portfolio</a>
-                    </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link text-white px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Contract</a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex" style="min-height: 100vh; background: #181818;">
+        <header>
+            <aside>
+                <!-- Sidebar -->
+                <nav class="sidebar d-flex flex-column justify-content-between align-items-center p-4">
+                    <div>
+                        <a class="navbar-brand mb-4 mx-3 text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="logo mb-4 text-center">
+                                <span class="text-md-center">N</span><br />
+                                <span class="text-white fw-bold">Nail</span><br />
+                                <span class="text-secondary small">Game Developer</span>
+                            </div>
+                        </a>
+                        <ul class="navbar-nav flex-column w-100 gap-2 mt-3">
+                            <li class="nav-item w-100">
+                                <a class="nav-link @(ViewContext.RouteData.Values["action"] as string == "Index" ? "active" : "") px-4 border-3"
+                                   asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link @(ViewContext.RouteData.Values["action"] as string == "ResumeAndCV" ? "active" : "") px-4 border-3"
+                                   asp-area="" asp-controller="Home" asp-action="ResumeAndCV">Resume / CV</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link @(ViewContext.RouteData.Values["action"] as string == "Portfolio" ? "active" : "") px-4 border-3"
+                                   asp-area="" asp-controller="Home" asp-action="Portfolio">Portfolio</a>
+                            </li>
+                            <li class="nav-item w-100">
+                                <a class="nav-link @(ViewContext.RouteData.Values["action"] as string == "Contract" ? "active" : "") px-4 border-3"
+                                   asp-area="" asp-controller="Home" asp-action="Contract">Contract</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="social mt-4">
+                        <a href="#" class="text-white-50 me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white-50"><i class="bi bi-github"></i></a>
+                    </div>
+                    <footer class="text-muted">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                            &copy; 2025 - Nail Portfolio
+                        </div>
+                    </footer>
+                </nav>
+            </aside>
+        </header>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - MyPortfolio - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
