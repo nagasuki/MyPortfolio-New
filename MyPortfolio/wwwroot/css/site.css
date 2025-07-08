@@ -1,47 +1,107 @@
-body {
+﻿body {
     background: #181818 !important;
 }
 
-.sidebar {
-    min-height: 100vh;
-    border-right: 1px solid #222a;
-    background: #222;
-    width: 220px;
+.portfolio-inner {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    /* ถ้าอยากได้แนวตั้งกลางจอด้วย */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    /* transition เพิ่มเติมถ้าอยากได้ */
 }
 
-    .sidebar .nav-link {
-        color: #aaa !important;
-        font-weight: 500;
-        transition: color 0.2s;
+.portfolio {
+    transition: padding-left 0.4s cubic-bezier(.6,0,.18,1);
+    padding-left: 220px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #222;
+    transition: transform 0.3s cubic-bezier(.55,0,.1,1), opacity 0.2s;
+}
+
+    .sidebar.hide {
+        transform: translateX(-120%);
+        opacity: 0;
+        pointer-events: none;
     }
 
-        .sidebar .nav-link.active,
-        .sidebar .nav-link:hover {
-            color: #00ffd5 !important;
-            background: none;
+        .sidebar.hide ~ .portfolio {
+            padding-left: 0 !important;
         }
 
-.nav-link.pointer-nav {
-    position: relative;
-    color: #00ffd5 !important;
+    .sidebar.show {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .sidebar .nav-link {
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+        position: relative;
+        min-width: 160px;
+        width: 180px;
+        max-width: 220px;
+        margin: 0 auto 10px auto;
+        text-align: center;
+        display: block;
+    }
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+    background: #00ffd5;
+    color: #181818 !important;
+    box-shadow: 0 2px 16px #00ffd544;
+    transform: translateX(6px) scale(1.03);
     font-weight: bold;
 }
 
-    .nav-link.pointer-nav::before {
-        content: '';
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 8px;
-        height: 8px;
-        background: #00ffd5;
-        border-radius: 50%;
-        box-shadow: 0 0 8px #00ffd5a0;
+    .sidebar .nav-link.active,
+    .sidebar .nav-link[aria-current="page"] {
+        background: linear-gradient(90deg, #00ffd5 70%, #13e0d9 100%);
+        color: #181818 !important;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-left: 6px solid #00ffd5;
+        transform: translateX(10px) scale(1.06);
+        box-shadow: 0 2px 16px #00ffd544;
     }
 
+        .sidebar .nav-link.active::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: #00ffd5;
+            border-radius: 50%;
+            box-shadow: none;
+            outline:none;
+        }
+
 .logo span:first-child {
-    font-size: 3rem;
+    font-size: 5rem;
     color: #00ffd5;
     font-weight: bold;
 }
@@ -54,6 +114,41 @@ body {
 .logo span.text-secondary {
     font-size: 0.9rem;
 }
+
+.back-to-top {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 999;
+    background: #00ffd5;
+    color: #181818;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    box-shadow: 0 4px 24px #00ffd522;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+
+    .back-to-top.show {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .back-to-top.hide {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    .back-to-top:hover {
+        background: #13e0d9;
+    }
 
 @media (max-width: 800px) {
     .sidebar {

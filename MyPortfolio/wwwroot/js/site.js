@@ -3,24 +3,25 @@
 
 // Write your JavaScript code.
 
-// IDs ของ section และ nav
-const sections = ['home', 'resume', 'portfolio', 'contract'];
-const navLinks = sections.map(id => document.getElementById('nav-' + id));
+const sidebar = document.getElementById('sidebar');
+const backToTopBtn = document.getElementById("backToTopBtn");
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    for (const section of sections) {
-        const el = document.getElementById(section);
-        const rect = el.getBoundingClientRect();
-        // ติดลบเล็กน้อยเพื่อเลื่อนเข้าจอ
-        if (rect.top <= 150 && rect.bottom >= 150) {
-            current = section;
-        }
-    }
-    navLinks.forEach(link => link.classList.remove('active', 'pointer-nav'));
-    if (current) {
-        const activeLink = document.getElementById('nav-' + current);
-        activeLink.classList.add('active', 'pointer-nav');
+window.addEventListener("scroll", function () {
+    if (window.scrollY === 0) {
+        sidebar.classList.add('show');
+        sidebar.classList.remove('hide');
+
+        backToTopBtn.classList.remove("show");
+        backToTopBtn.classList.add("hide");
+    } else {
+        sidebar.classList.add('hide');
+        sidebar.classList.remove('show');
+
+        backToTopBtn.classList.add("show");
+        backToTopBtn.classList.remove("hide");
     }
 });
 
+backToTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
